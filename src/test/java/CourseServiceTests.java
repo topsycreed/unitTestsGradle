@@ -71,6 +71,16 @@ class CourseServiceTests {
     }
 
     @Test
+    void findStudentByNameMockitoNoSpyTest() {
+        String name = "Ivan";
+
+        //не сможет найти Ивана, так как мы не имитировали это поведение и не используем spy чтобы вернуть реальное значение
+        Exception thrown = assertThrows(StudentNotFoundException.class,
+                () -> courseService.findStudentByName(name));
+        assertEquals(String.format("Student with name %s not found", name), thrown.getMessage());
+    }
+
+    @Test
     void averageScoreMockitoTest() {
         //need to implement
     }
