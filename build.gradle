@@ -15,6 +15,7 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
     implementation 'org.junit.jupiter:junit-jupiter-api:5.9.1'
     implementation 'io.qameta.allure:allure-junit5:2.25.0'
+    testImplementation 'org.mockito:mockito-junit-jupiter:5.11.0'
 }
 
 test {
