@@ -7,10 +7,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@Tag("selenium")
 class SeleniumTests {
     WebDriver driver;
 
@@ -63,8 +63,7 @@ class SeleniumTests {
     void checkTextareaInput() {
         openForm();
         WebElement textarea = driver.findElement(By.name("my-textarea"));
-        textarea.sendKeys("Test\n");
-        textarea.sendKeys("Test2");
+        textarea.sendKeys("Test\nTest2");
         driver.findElement(By.xpath("//button[text()='Submit']")).click();
         WebElement h1 = driver.findElement(By.xpath("//h1[text()='Form submitted']"));
         assertEquals("Form submitted", h1.getText());
@@ -76,7 +75,7 @@ class SeleniumTests {
         WebElement disabled = driver.findElement(By.name("my-disabled"));
         assertEquals("", disabled.getText());
         Exception thrown = assertThrows(ElementNotInteractableException.class, () -> disabled.sendKeys("Test\n"));
-        org.assertj.core.api.Assertions.assertThat(thrown.getMessage()).contains("element not interactable");
+        assertThat(thrown.getMessage()).contains("element not interactable");
     }
 
     @Test
