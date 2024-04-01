@@ -16,8 +16,10 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.fpmi.Constants.BASE_URL;
+import static steps.WebFormSteps.openWebFormPage;
+import static steps.WebFormSteps.sendInput;
 
-public class SeleniumActionTests {
+class SeleniumActionTests {
     WebDriver driver;
     @BeforeEach
     void start() {
@@ -28,6 +30,48 @@ public class SeleniumActionTests {
     @AfterEach
     void close() {
         driver.close();
+    }
+
+    @Test
+    void webFormOpenTest() throws InterruptedException {
+        //act
+        WebElement webFormButton = driver.findElement(By.xpath("//a[@href = 'web-form.html']"));
+        Thread.sleep(3000);
+        webFormButton.click();
+
+        WebElement title = driver.findElement(By.className("display-6"));
+
+        //assert
+        Assertions.assertEquals("https://bonigarcia.dev/selenium-webdriver-java/web-form.html", driver.getCurrentUrl());
+        Assertions.assertEquals("Web form", title.getText());
+    }
+
+    @Test
+    void textInputTest() throws InterruptedException {
+        //arrange
+        openWebFormPage(driver);
+        //act
+        WebElement textInput = driver.findElement(By.cssSelector("#my-text-id"));
+        Thread.sleep(3000);
+        textInput.sendKeys("test");
+        Thread.sleep(3000);
+
+        //assert
+        Assertions.assertEquals("test", textInput.getAttribute("value"));
+    }
+
+    @Test
+    void textInputClearTest() throws InterruptedException {
+        openWebFormPage(driver);
+        sendInput(driver, "test");
+
+        Thread.sleep(3000);
+        WebElement textInput = driver.findElement(By.cssSelector("#my-text-id"));
+        textInput.clear();
+        Thread.sleep(3000);
+
+        //assert
+        Assertions.assertEquals("", textInput.getAttribute("value"));
     }
 
     @Test
