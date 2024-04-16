@@ -4,6 +4,7 @@ import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import pages.LoginPage;
 
 import java.util.List;
 
@@ -22,6 +23,33 @@ class SeleniumTests {
     @AfterEach
     void close() {
         driver.close();
+    }
+
+    @Test
+    void successfulLoginTest() {
+        driver.get("https://bonigarcia.dev/selenium-webdriver-java/login-form.html");
+
+        WebElement subTitle = driver.findElement(By.className("display-6"));
+        WebElement loginInput = driver.findElement(By.id("username"));
+        WebElement passwordInput = driver.findElement(By.id("password"));
+        WebElement submitButton = driver.findElement(By.xpath("//button[@type='submit']"));
+
+        loginInput.sendKeys("user");
+        passwordInput.sendKeys("user");
+        String textBeforeClick = subTitle.getText();
+        submitButton.click();
+
+        assertThat(textBeforeClick).isEqualTo("Login form");
+        WebElement successMessage = driver.findElement(By.id("success"));
+        assertThat(successMessage.isDisplayed()).isTrue();
+    }
+
+    @Test
+    void successfulLoginWithPOMTest() {
+        LoginPage loginPage = new LoginPage(driver);
+
+        loginPage.successfulSignIn();
+        assertThat(loginPage.successMessageIsPresent()).isTrue();
     }
 
     @Test

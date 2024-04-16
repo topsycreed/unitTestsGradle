@@ -1,7 +1,6 @@
 package pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 public class ExtendedLoginPage extends ExtendedBasePage {
     By usernameInput = By.id("username");

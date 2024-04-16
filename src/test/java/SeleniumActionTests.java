@@ -155,6 +155,23 @@ class SeleniumActionTests {
     }
 
     @Test
+    void selectFromDataListTest() throws InterruptedException {
+        driver.get("https://bonigarcia.dev/selenium-webdriver-java/web-form.html");
+        WebElement dataList = driver.findElement(By.name("my-datalist"));
+        List<WebElement> dataListOptions = driver.findElements(By.xpath("//datalist/option"));
+        for (WebElement option : dataListOptions) {
+            dataList.clear();
+            String optionValue = option.getAttribute("value");
+            dataList.sendKeys(optionValue);
+            System.out.println("Selected: " + optionValue);
+            Thread.sleep(2000);
+        }
+        dataList.clear();
+        dataList.sendKeys("CustomValue");
+        Thread.sleep(3000);
+    }
+
+    @Test
     void getInfoTests() {
         //get isDisplayed
         WebElement webFormButton = driver.findElement(By.xpath("//a[@href = 'web-form.html']"));
@@ -304,5 +321,60 @@ class SeleniumActionTests {
                 .scrollToElement(footerLink)
                 .perform();
         Thread.sleep(2000);
+    }
+
+    @Test
+    void selectTest() throws InterruptedException {
+        driver.get("https://bonigarcia.dev/selenium-webdriver-java/web-form.html");
+        var selectElement = driver.findElement(By.name("my-select"));
+        Select select = new Select(selectElement);
+        select.selectByValue("1");
+        select.selectByValue("2");
+        select.selectByValue("3");
+        select.selectByIndex(0);
+        select.selectByIndex(1);
+        select.selectByIndex(2);
+        select.selectByIndex(3);
+        select.selectByVisibleText("One");
+        select.selectByVisibleText("Two");
+        select.selectByVisibleText("Three");
+        select.selectByVisibleText("Open this select menu");
+    }
+
+    @Test
+    void testDisabledInputMy() {
+        driver.get("https://bonigarcia.dev/selenium-webdriver-java/web-form.html");
+
+        WebElement disabled = driver.findElement(By.name("my-disabled"));
+
+        assertThat(disabled.isEnabled()).isFalse();
+    }
+
+    @Test
+    public void testDisabledInputToMakeEnabled() {
+        driver.get("https://bonigarcia.dev/selenium-webdriver-java/web-form.html");
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("document.querySelector(\"input[placeholder='Disabled input']\").disabled = false");
+        driver.findElement(By.xpath("//input[@placeholder='Disabled input']")).sendKeys("Disabled input = success");
+        var input = driver.findElement(By.xpath("//input[@placeholder='Disabled input']"));
+
+        assertThat(input.isEnabled()).isTrue();
+    }
+
+    @Test
+    public void testReadonlyInput(){
+        driver.get("https://bonigarcia.dev/selenium-webdriver-java/web-form.html");
+
+        WebElement readonly = driver.findElement(By.name("my-readonly"));
+        //readonly.click();
+        boolean isReadOnly = readonly.getAttribute("readonly") != null;
+        System.out.println(isReadOnly);
+        System.out.println(readonly.getAttribute("readonly"));
+
+        assertThat(Boolean.parseBoolean(readonly.getAttribute("readonly")))
+                .as("Should be %s", isReadOnly)
+                .isFalse();
+        Assertions.assertEquals(readonly.getAttribute("readonly"), "true");
     }
 }
