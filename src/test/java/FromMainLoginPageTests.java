@@ -1,3 +1,5 @@
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -6,6 +8,8 @@ import pages.MainPage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Feature("Site")
+@Story("MainPage")
 class FromMainLoginPageTests {
     MainPage mainPage;
 
