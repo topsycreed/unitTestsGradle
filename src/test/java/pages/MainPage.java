@@ -23,6 +23,13 @@ public class MainPage extends ExtendedBasePage {
         visit("https://bonigarcia.dev/selenium-webdriver-java/");
     }
 
+    public MainPage(WebDriver driver) {
+        super(driver);
+        PageFactory.initElements(driver, this);
+        this.header = new HeaderComponent(driver);
+        visit("https://bonigarcia.dev/selenium-webdriver-java/");
+    }
+
     public FactoryLoginPage openLoginPage() {
         click(loginFormButton);
         assertThat(driver.getCurrentUrl()).isEqualTo("https://bonigarcia.dev/selenium-webdriver-java/login-form.html");

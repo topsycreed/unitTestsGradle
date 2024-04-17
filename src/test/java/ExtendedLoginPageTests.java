@@ -1,13 +1,14 @@
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import pages.BasicLoginPage;
 import pages.ExtendedLoginPage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Feature("Site")
+@Story("LoginPage")
 class ExtendedLoginPageTests {
     ExtendedLoginPage login;
 

@@ -1,6 +1,7 @@
 package pages;
 
 import components.HeaderComponent;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -44,16 +45,19 @@ public class FactoryLoginPage extends ExtendedBasePage {
         header = new HeaderComponent(driver);
     }
 
+    @Step("Factory login with username and password")
     public void with(String username, String password) {
         type(usernameInput, username);
         type(passwordInput, password);
         click(submitButton);
     }
 
+    @Step("Factory get success box is present")
     public boolean successBoxPresent() {
         return isDisplayed(successBox);
     }
 
+    @Step("Factory get invalid credentials box is present")
     public boolean invalidCredentialsBoxPresent() {
         return isDisplayed(invalidCredentialsBox);
     }

@@ -1,10 +1,25 @@
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Flaky;
+import io.qameta.allure.Issue;
+import io.qameta.allure.Link;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
+import io.qameta.allure.TmsLink;
 import org.fpmi.User;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class SimpleJUnitTests {
+@Epic("Epic")
+@Feature("SimpleJUnit")
+@Owner("Gennadii Chursov")
+class SimpleJUnitTests {
     @Test
+    @DisplayName("Check simple Junit test")
+    @Story("Simple")
     void simpleJUnitTest() {
         // Здесь размещаем код теста
         int actualSum = 2 + 2;
@@ -14,6 +29,13 @@ public class SimpleJUnitTests {
     }
 
     @Test
+    @DisplayName("Check disabled Junit test")
+    @Story("Disabled")
+    @Issue("Jira-123")
+    @Link(value = "value", name = "name", url = "https://bonigarcia.dev/selenium-webdriver-java/web-form.html")
+    @Severity(SeverityLevel.BLOCKER)
+    @TmsLink("TmsLink")
+    @Flaky
     @Disabled //тест не будет запущен,  в отчет попадет как ignored
     void disabledTest() {
         int actualSum = 2 + 2;
