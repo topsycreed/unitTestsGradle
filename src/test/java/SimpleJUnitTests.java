@@ -2,6 +2,7 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Flaky;
 import io.qameta.allure.Issue;
+import io.qameta.allure.Issues;
 import io.qameta.allure.Link;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
@@ -16,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @Epic("Epic")
 @Feature("SimpleJUnit")
 @Owner("Gennadii Chursov")
+@Link(value = "value", name = "name", url = "https://bonigarcia.dev/selenium-webdriver-java/web-form.html")
 class SimpleJUnitTests {
     @Test
     @DisplayName("Check simple Junit test")
@@ -31,8 +33,7 @@ class SimpleJUnitTests {
     @Test
     @DisplayName("Check disabled Junit test")
     @Story("Disabled")
-    @Issue("Jira-123")
-    @Link(value = "value", name = "name", url = "https://bonigarcia.dev/selenium-webdriver-java/web-form.html")
+    @Issues({@Issue("Jira-123"), @Issue("Jira-234")})
     @Severity(SeverityLevel.BLOCKER)
     @TmsLink("TmsLink")
     @Flaky
