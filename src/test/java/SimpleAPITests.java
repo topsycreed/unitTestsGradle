@@ -1,4 +1,7 @@
+import io.restassured.response.Response;
+import io.restassured.response.ValidatableResponse;
 import models.User;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
@@ -16,6 +19,36 @@ class SimpleAPITests {
     void simpleGetInventoryTest() {
         String endpoint = "https://petstore.swagger.io/v2/store/inventory";
         given().when().get(endpoint).then().log().all();
+    }
+
+    @Test
+    void exampleRestAssuredTest() {
+        String jsonBody = """
+                {
+                  "id": 0,
+                  "username": "test_22_04_001",
+                  "firstName": "firstName",
+                  "lastName": "lastName",
+                  "email": "email@gmail.com",
+                  "password": "test123",
+                  "phone": "phone not exist",
+                  "userStatus": 0
+                }
+                """;
+        String url = "https://petstore.swagger.io/v2/user";
+
+        ValidatableResponse response =
+                        given().
+                            header("accept", "application/json").
+                            header("Content-Type", "application/json").
+                            body(jsonBody).
+                        when().
+                            post(url).
+                        then();
+        Response responseAsResponse = response.extract().response();
+        int status = responseAsResponse.statusCode();
+        String responseText = responseAsResponse.body().prettyPrint();
+        Assertions.assertEquals(200, status);
     }
 
     @Test
@@ -121,7 +154,7 @@ class SimpleAPITests {
                     statusCode(200).
                     body("username", equalTo("FPMI_user_3")).
                     body("firstName", startsWith("firstName3")).
-                    body("lastName", equalToIgnoringCase("lastName3")).
+                    body("lastName", equalToIgnoringCase("LASTNAME3")).
                     body("email", matchesPattern("^[a-zA-Z0-9._%+-]+@gmail\\.com$")).
                     body("password", equalTo("qwe123")).
                     body("phone", equalTo("123123123"));
