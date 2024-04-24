@@ -1,7 +1,10 @@
 package models;
 
+import lombok.Builder;
+
+@Builder
 public class User {
-    private int id;
+    private long id;
     private String username;
     private String firstName;
     private String lastName;
@@ -13,7 +16,7 @@ public class User {
     public User() {
     }
 
-    public User(int id, String username, String firstName, String lastName, String email, String password, String phone, int userStatus) {
+    public User(long id, String username, String firstName, String lastName, String email, String password, String phone, int userStatus) {
         this.id = id;
         this.username = username;
         this.firstName = firstName;
@@ -24,11 +27,11 @@ public class User {
         this.userStatus = userStatus;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

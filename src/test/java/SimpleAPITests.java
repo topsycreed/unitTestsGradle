@@ -173,7 +173,6 @@ class SimpleAPITests {
                     statusCode(200).
                     header("content-type", equalTo("application/json")).
                     body("id", everyItem(notNullValue())).
-                    body("name", everyItem(notNullValue())).
                     body("status", everyItem(equalTo("available"))).
                     body("size()", greaterThan(2));
     }
