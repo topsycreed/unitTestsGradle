@@ -31,6 +31,11 @@ public class LoginPage {
         driver.findElement(submitButton).click();
     }
 
+    public MainPage clickIndex() {
+        //click
+        return new MainPage(driver);
+    }
+
     public boolean successMessageIsPresent() {
         return driver.findElement(By.id("success")).isDisplayed();
     }

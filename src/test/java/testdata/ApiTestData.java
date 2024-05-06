@@ -14,4 +14,9 @@ public class ApiTestData {
             .phone("12345678")
             .userStatus(0)
             .build();
+
+    public static final User TEST = User.builder()
+            .id(1)
+            .username("test")
+            .build();
 }

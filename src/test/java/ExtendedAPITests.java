@@ -16,14 +16,18 @@ class ExtendedAPITests {
 
     @Test
     void getUserDeserializationTest() {
-        String username = "FPMI_user_1";
-        String endpoint = "https://petstore.swagger.io/v2/user/" + username;
-        User expextedUser = new User(0, "FPMI_user_1", "firstName", "lastName", "email@gmail.com", "qwerty", "12345678", 0);
+        User expextedUser = new User(0, "FPMI_user_1", "firstName", "lastName",
+                "email@gmail.com", "qwerty", "12345678", 0);
+        String endpoint = "https://petstore.swagger.io/v2/user/" + expextedUser.getUsername();
+
+        //UserError userError = given().when().get(endpoint).as(UserError.class);
 
         User actualUser = given().when().get(endpoint).as(User.class);
 //        User actualUser = given().when().get(endpoint).then().extract().as(User.class);
 
-        assertThat(actualUser).usingRecursiveComparison().ignoringFields("id").isEqualTo(expextedUser);
+        assertThat(actualUser).usingRecursiveComparison()
+                .ignoringFields("id")
+                .isEqualTo(expextedUser);
 
         //same as
         SoftAssertions softly = new SoftAssertions();
@@ -33,6 +37,7 @@ class ExtendedAPITests {
         softly.assertThat(actualUser.getUserStatus()).isEqualTo(expextedUser.getUserStatus());
         softly.assertThat(actualUser.getEmail()).isEqualTo(expextedUser.getEmail());
         softly.assertThat(actualUser.getPassword()).isEqualTo(expextedUser.getPassword());
+        softly.assertThat(actualUser.getPhone()).isEqualTo(expextedUser.getPhone());
         softly.assertAll();
     }
 
@@ -46,26 +51,27 @@ class ExtendedAPITests {
 //                get(endpoint).
 //                as(new TypeRef<List<Pet>>() {
 //                });
-//        List<Pet> pets = given().
-//                    header("accept", "application/json").
-//                    queryParam("status", "available").
-//                when().
-//                    get(endpoint).
-//                        as(new TypeRef<>() {
-//                        });
         List<Pet> pets = given().
-                header("accept", "application/json").
-                queryParam("status", "available").
+                    header("accept", "application/json").
+                    queryParam("status", "available").
                 when().
-                get(endpoint).
-                then().extract().as(new TypeRef<List<Pet>>() {
-                });
+                    get(endpoint).
+                        as(new TypeRef<>() {});
+        //List<Pet> filteredPets = pets.stream().filter(pet -> pet.getId() < 1000).toList();
+//        List<Pet> pets = given().
+//                header("accept", "application/json").
+//                queryParam("status", "available").
+//                when().
+//                get(endpoint).
+//                then().extract().as(new TypeRef<>() {
+//                });
         assertThat(pets).hasSizeGreaterThan(100);
     }
 
     @Test
     void jsonPathTest() {
-        User expextedUser = new User(0, "FPMI_user_1", "firstName", "lastName", "email@gmail.com", "qwerty", "12345678", 0);
+        User expextedUser = new User(0, "FPMI_user_1", "firstName", "lastName",
+                "email@gmail.com", "qwerty", "12345678", 0);
         String endpoint = "https://petstore.swagger.io/v2/user/" + expextedUser.getUsername();
 
         String jsonResponse = given().when().get(endpoint).asString();
@@ -98,6 +104,8 @@ class ExtendedAPITests {
 
         SoftAssertions softly = new SoftAssertions();
         softly.assertThat(jsonPath.getLong("[0].id")).isPositive();
+        softly.assertThat(jsonPath.getLong("[0].category.id")).isPositive();
+        softly.assertThat(jsonPath.getString("[0].photoUrls[0]")).isNotEmpty();
         softly.assertThat(ids).allMatch(id -> id > 0L);
         softly.assertThat(jsonPath.getString("[1].name")).isNotEmpty();
         softly.assertThat(jsonPath.getString("[2].tags[0].name")).isNotEmpty();

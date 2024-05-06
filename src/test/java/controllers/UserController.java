@@ -38,12 +38,12 @@ public class UserController {
     }
 
     @Step("Get user by name")
-    public Response getUserByName(String name) {
-        return given(this.requestSpecification).get(String.format("user/" + name)).andReturn();
+    public Response getUserByName(String username) {
+        return given(this.requestSpecification).get("user/" + username).andReturn();
     }
 
     @Step("Delete user by name")
-    public Response deleteUserByName(String name) {
-        return given(this.requestSpecification).delete(String.format("user/" + name)).andReturn();
+    public Response deleteUserByName(String username) {
+        return given(this.requestSpecification).delete("user/" + username).andReturn();
     }
 }

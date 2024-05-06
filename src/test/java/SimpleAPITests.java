@@ -15,9 +15,11 @@ import static org.hamcrest.Matchers.startsWith;
 
 class SimpleAPITests {
 
+    private static final String BASE_URL = "https://petstore.swagger.io/v2/";
+
     @Test
     void simpleGetInventoryTest() {
-        String endpoint = "https://petstore.swagger.io/v2/store/inventory";
+        String endpoint = BASE_URL + "store/inventory";
         given().when().get(endpoint).then().log().all();
     }
 
