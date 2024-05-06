@@ -38,7 +38,6 @@ public class AllureSteps {
     public void download(String link, File destination) throws IOException {
         try (CloseableHttpClient client = HttpClientBuilder.create().build()) {
             HttpUriRequestBase request = new HttpGet(link);
-
             client.execute(request, (HttpClientResponseHandler<byte[]>) response -> {
                 InputStream inputStream = response.getEntity().getContent();
                 //FileUtils.copyInputStreamToFile(inputStream, destination);
