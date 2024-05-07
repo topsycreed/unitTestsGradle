@@ -27,6 +27,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.32'
     testCompileOnly 'org.projectlombok:lombok:1.18.32'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.32'
+    implementation 'org.apache.pdfbox:pdfbox:2.0.31'
 }
 
 test {

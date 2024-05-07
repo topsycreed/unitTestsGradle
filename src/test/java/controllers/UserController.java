@@ -19,6 +19,7 @@ public class UserController {
 
     public UserController() {
         RestAssured.defaultParser = Parser.JSON;
+        this.requestSpecification.header("api_key", config.getApiKey());
         this.requestSpecification.contentType(ContentType.JSON);
         this.requestSpecification.accept(ContentType.JSON);
         this.requestSpecification.baseUri(config.getBaseUrl());
