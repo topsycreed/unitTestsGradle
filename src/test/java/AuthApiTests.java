@@ -1,3 +1,4 @@
+import configurations.TestConfig;
 import controllers.CartController;
 import io.qameta.allure.Story;
 import io.restassured.response.Response;
@@ -15,6 +16,7 @@ import static testdata.ApiTestData.JEANS_ITEM;
 @Story("Auth API")
 class AuthApiTests {
     CartController controller = new CartController();
+    TestConfig config = new TestConfig();
 
     @Test
     void tokenTest() {
@@ -22,19 +24,20 @@ class AuthApiTests {
 
         Response response = given().
                 when().
-                header("Authorization", "Basic MjBlNDI2OTAtODkzYS00ODAzLTg5ZTctODliZmI0ZWJmMmZlOjVmNDk5NDVhLTdjMTUtNDczNi05NDgxLWU4OGVkYjQwMGNkNg==").
-                header("Aesite", "AEO_US").
-                formParam("grant_type", "client_credentials").
-                post(url).
+                    header("Authorization", config.getBasicAuth()).
+                    header("Aesite", "AEO_US").
+                    contentType("application/x-www-form-urlencoded").
+                    formParam("grant_type", "client_credentials").
+                    post(url).
                 then().
-                log().
-                all().
-                assertThat().
-                statusCode(200).
-                body("scope", equalTo("guest")).
-                body("token_type", equalTo("client_credentials")).
-                body("expires_in", equalTo(1800))
-                .extract().response();
+                    log().
+                    all().
+                    assertThat().
+                    statusCode(200).
+                    body("scope", equalTo("guest")).
+                    body("token_type", equalTo("client_credentials")).
+                    body("expires_in", equalTo(1800))
+                    .extract().response();
         String token = response.jsonPath().get("access_token");
         System.out.println("Token: " + token);
     }

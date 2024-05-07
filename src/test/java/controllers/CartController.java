@@ -32,11 +32,13 @@ public class CartController {
     public String getGuestToken() {
         return given().
                 when().
-                    header("Authorization", "Basic MjBlNDI2OTAtODkzYS00ODAzLTg5ZTctODliZmI0ZWJmMmZlOjVmNDk5NDVhLTdjMTUtNDczNi05NDgxLWU4OGVkYjQwMGNkNg==").
+                    header("Authorization", config.getBasicAuth()).
                     header("Aesite", "AEO_US").
                     formParam("grant_type", "client_credentials").
                     post(config.getAuthUrl()).
                 then().
+                    assertThat().
+                    statusCode(200).
                     extract().jsonPath().get("access_token");
     }
 
@@ -66,8 +68,8 @@ public class CartController {
         return given(this.requestSpecification)
                 .patch("/items")
                 .then()
-                .statusCode(202)
-                .log().body()
-                .extract().response();
+                    .statusCode(202)
+                    .log().body()
+                    .extract().response();
     }
 }
