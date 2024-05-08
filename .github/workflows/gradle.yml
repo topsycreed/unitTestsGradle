@@ -39,7 +39,7 @@ jobs:
       run: ./gradlew build
     - name: Check contents of build directory
       if: always()
-      run: ls
+      run: ls -R build
     - name: Upload Allure Report as Artifact
       if: always()
       uses: actions/upload-artifact@v2
