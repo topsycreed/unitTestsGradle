@@ -46,6 +46,13 @@ jobs:
       with:
         name: allure-report
         path: build/allure-results
+    - name: Deploy Allure report to GitHub Pages
+      if: always() # Execute even if previous steps fail
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }} # Provide the GitHub token for authentication
+        publish_branch: master # Specify the branch to publish the report to
+        publish_dir: build/allure-results # Specify the directory containing the report
 
   dependency-submission:
 
