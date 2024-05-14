@@ -2,6 +2,7 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -14,6 +15,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.selenide.HomePage;
+import pages.selenide.WebFormPage;
 import steps.AllureSteps;
 
 import java.io.IOException;
@@ -28,6 +31,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.title;
+import static com.codeborne.selenide.WebDriverRunner.url;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -122,5 +126,15 @@ class SelenideTests {
 
         ElementsCollection images = $$("img").filter(visible);
         images.shouldHave(size(4), Duration.ofSeconds(10));
+    }
+
+    @Test
+    void pageObjectTest() {
+        HomePage homePage = new HomePage();
+        homePage.open();
+        WebFormPage webFormPage = homePage.openWebForm();
+        webFormPage.submit();
+
+        Assertions.assertThat(url()).contains("https://bonigarcia.dev/selenium-webdriver-java/submitted-form.html");
     }
 }
