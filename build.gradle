@@ -30,6 +30,7 @@ dependencies {
     implementation 'org.apache.pdfbox:pdfbox:2.0.31'
     implementation 'com.codeborne:selenide:7.3.1'
     implementation 'com.microsoft.playwright:playwright:1.43.0'
+    implementation 'io.appium:java-client:9.2.2'
 }
 
 test {
