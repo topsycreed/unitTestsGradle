@@ -1,0 +1,7 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Sun Dec 29 11:37:16 GMT 2024","Sun Dec 29 11:37:16 GMT 2024","336","","FluentControllerApiTests","","FluentControllerApiTests","checkAddUserTest","Check add user is returns 200 status ok",""
+"passed","Sun Dec 29 11:37:18 GMT 2024","Sun Dec 29 11:37:18 GMT 2024","16","","SimpleJUnitTests","","SimpleJUnitTests","tagTest","tagTest()",""
+"passed","Sun Dec 29 11:37:15 GMT 2024","Sun Dec 29 11:37:16 GMT 2024","583","","FluentControllerApiTests","","FluentControllerApiTests","checkAddUserExtendedTest","Check user added correctly",""
+"broken","Sun Dec 29 11:37:16 GMT 2024","Sun Dec 29 11:37:18 GMT 2024","2011","","SimpleJUnitTests","","SimpleJUnitTests","timeoutTest","timeoutTest()",""
+"passed","Sun Dec 29 11:37:15 GMT 2024","Sun Dec 29 11:37:15 GMT 2024","355","","ControllerApiTests","","ControllerApiTests","checkAddUserTest","Check add user is returns 200 status ok",""
+"passed","Sun Dec 29 11:37:11 GMT 2024","Sun Dec 29 11:37:15 GMT 2024","3566","","ControllerApiTests","","ControllerApiTests","checkAddUserExtendedTest","Check user added correctly",""
