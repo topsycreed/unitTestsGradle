@@ -52,8 +52,9 @@ class SeleniumTests {
     @Test
     void openForm3() {
         driver.get("https://bonigarcia.dev/selenium-webdriver-java/");
-        List<WebElement> chapter3 = driver.findElements(By.xpath("//div[@class = 'card-body']"));
-        List<WebElement> webFormButton = chapter3.get(0).findElements(By.xpath("//a[contains(@class, 'btn')]"));
+        List<WebElement> chapters = driver.findElements(By.xpath("//div[@class = 'card-body']"));
+        WebElement chapter3 = chapters.get(0);
+        List<WebElement> webFormButton = chapter3.findElements(By.xpath("//a[contains(@class, 'btn')]"));
         webFormButton.get(0).click();
         WebElement actualH1 = driver.findElement(By.xpath("//h1[@class='display-6']"));
         assertEquals("Web form", actualH1.getText());
