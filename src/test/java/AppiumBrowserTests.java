@@ -25,7 +25,7 @@ public class AppiumBrowserTests {
         UiAutomator2Options options = new UiAutomator2Options();
         options
                 .setPlatformName("Android")
-                .setPlatformVersion("14")
+                .setPlatformVersion("15")
                 .setAutomationName("UiAutomator2")
                 .setDeviceName("emulator-5554")
                 .noReset()

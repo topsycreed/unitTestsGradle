@@ -26,14 +26,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class AppiumTests {
     private static final String APP = "https://github.com/appium-pro/TheApp/releases/download/v1.12.0/TheApp.apk";
-    private static final String SERVER = "http://172.30.160.1:4723/";
+    private static final String SERVER = "http://127.0.0.1:4723/";
     private AndroidDriver driver;
 
     @BeforeEach
     void setup() throws MalformedURLException {
         DesiredCapabilities ds = new DesiredCapabilities();
         ds.setCapability("platformName", "Android");
-        ds.setCapability("platformVersion", "14");
+        ds.setCapability("platformVersion", "15");
         ds.setCapability("deviceName", "emulator-5554");
         ds.setCapability("app", APP);
         ds.setCapability("automationName", "UiAutomator2");
