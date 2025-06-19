@@ -6,11 +6,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "animal")
+@Table(name = "zoo")
 public class Zoo {
     @Id
     private int id;
-    @Column(name = "name")
+    @Column(name = "`name`")
     private String name;
 
     public int getId() {

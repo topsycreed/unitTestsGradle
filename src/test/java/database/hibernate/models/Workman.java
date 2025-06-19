@@ -10,11 +10,11 @@ import jakarta.persistence.Table;
 public class Workman {
     @Id
     int id;
-    @Column(name = "name", nullable = false)
+    @Column(name = "`name`", nullable = false)
     String name;
     @Column(name = "age")
     int age;
-    @Column(name = "position")
+    @Column(name = "`position`")
     int position;
 
     public int getId() {
