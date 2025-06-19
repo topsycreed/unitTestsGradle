@@ -10,11 +10,11 @@ import jakarta.persistence.Table;
 public class Places {
     @Id
     int id;
-    @Column(name = "row")
+    @Column(name = "`row`")
     int row;
     @Column(name = "place_num")
     int place_num;
-    @Column(name = "name")
+    @Column(name = "`name`")
     String name;
 
     public int getId() {

@@ -15,7 +15,7 @@ public class Animal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-    @Column(name = "name")
+    @Column(name = "`name`")
     private String name;
     @Column(name = "age")
     private int age;
