@@ -1,9 +1,6 @@
 package database.hibernate.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "workman")
@@ -14,8 +11,9 @@ public class Workman {
     String name;
     @Column(name = "age")
     int age;
-    @Column(name = "`position`")
-    int position;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "`position`", referencedColumnName = "id")
+    Position position;
 
     public int getId() {
         return id;
@@ -41,11 +39,11 @@ public class Workman {
         this.age = age;
     }
 
-    public int getPosition() {
+    public Position getPosition() {
         return position;
     }
 
-    public void setPosition(int position) {
+    public void setPosition(Position position) {
         this.position = position;
     }
 

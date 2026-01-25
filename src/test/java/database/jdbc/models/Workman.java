@@ -1,4 +1,4 @@
-package database;
+package database.jdbc.models;
 
 public class Workman {
     private int id;

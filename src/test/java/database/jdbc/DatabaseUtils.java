@@ -1,12 +1,10 @@
-package database;
-
-import database.jdbc.DatabaseConnection;
+package database.jdbc;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
 public class DatabaseUtils {
-    public static void createData() {
+    public static void createTables() {
         try {
             executeUpdate("""
                     CREATE TABLE public.places (
@@ -73,6 +71,13 @@ public class DatabaseUtils {
                     \tCONSTRAINT zoo_animal_fk_1 FOREIGN KEY (animal_id) REFERENCES public.animal(id),
                     \tCONSTRAINT zoo_animal_fk_2 FOREIGN KEY (workman) REFERENCES public.workman(id)
                     );""");
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void insertTestData() {
+        try {
             executeUpdate("""
                     INSERT INTO public.places (id, "row", place_num, "name") VALUES(1, 1, 185, 'Загон 1');
                     INSERT INTO public.places (id, "row", place_num, "name") VALUES(2, 2, 245, 'Загон 2');
@@ -126,7 +131,7 @@ public class DatabaseUtils {
                     INSERT INTO public.zoo_animal (zoo_id, animal_id, time_apperance, workman) VALUES(1, 9, null, 3);
                     INSERT INTO public.zoo_animal (zoo_id, animal_id, time_apperance, workman) VALUES(2, 10, null, 4);""");
         } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Failed to init DB test data", e);
         }
     }
 

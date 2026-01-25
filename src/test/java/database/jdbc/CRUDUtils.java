@@ -1,6 +1,7 @@
-package database;
+package database.jdbc;
 
-import database.jdbc.DatabaseConnection;
+import database.jdbc.models.Animal;
+import database.jdbc.models.Places;
 import lombok.SneakyThrows;
 
 import java.sql.Connection;

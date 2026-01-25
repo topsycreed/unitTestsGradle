@@ -1,4 +1,4 @@
-package database;
+package database.jdbc.models;
 
 public class Places {
     private int id;

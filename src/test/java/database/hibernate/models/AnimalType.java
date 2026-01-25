@@ -6,11 +6,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "zoo")
-public class Zoo {
+@Table(name = "`types`")
+public class AnimalType {
     @Id
     @Column(name = "id")
     private int id;
+
     @Column(name = "`name`")
     private String name;
 
@@ -18,7 +19,7 @@ public class Zoo {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

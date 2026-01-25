@@ -1,12 +1,15 @@
-import database.DatabaseUtils;
+package tests.db;
+
+import database.jdbc.DatabaseUtils;
 import database.hibernate.DBImprovedHibernateService;
-import database.hibernate.models.Animal;
-import database.hibernate.models.Places;
-import database.hibernate.models.Workman;
+import database.hibernate.models.*;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import jakarta.persistence.PersistenceException;
 import org.hibernate.exception.ConstraintViolationException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -38,12 +41,15 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  *               .setParameter("id", 88)
  *               .getSingleResult();
  */
+@Feature("database")
+@Story("Hibernate")
 class ZooHibernateImprovedTests {
-    DBImprovedHibernateService dbHibernateService = new DBImprovedHibernateService();
+    static DBImprovedHibernateService dbHibernateService;
 
     @BeforeAll
     static void init() {
-        DatabaseUtils.createData();
+        dbHibernateService = new DBImprovedHibernateService();
+        DatabaseUtils.insertTestData();
     }
 
     /**
@@ -61,13 +67,24 @@ class ZooHibernateImprovedTests {
             animal.setId(id);
             animal.setName("Sharik");
             animal.setAge(10);
-            animal.setType(1);
-            animal.setSex(1);
-            animal.setPlace(1);
+
+            AnimalType type = new AnimalType();
+            type.setId(1);
+            animal.setType(type);
+
+            Sex sex = new Sex();
+            sex.setId(1);
+            animal.setSex(sex);
+
+            Places place = new Places();
+            place.setId(1);
+            animal.setPlace(place);
+
             animals.add(animal);
         }
         return animals.stream();
     }
+
     /**
      * В таблицу public.animal нельзя добавить строку с индексом от 1 до 10 включительно
      */
@@ -86,8 +103,13 @@ class ZooHibernateImprovedTests {
         workman.setId(88);
         workman.setName(null);
         workman.setAge(12);
-        workman.setPosition(1);
-        assertThrows(PersistenceException.class, () -> dbHibernateService.insertWorkman(workman));
+
+        Position position = new Position();
+        position.setId(1);
+        workman.setPosition(position);
+
+        assertThrows(PersistenceException.class,
+                () -> dbHibernateService.insertWorkman(workman));
     }
 
     /**
