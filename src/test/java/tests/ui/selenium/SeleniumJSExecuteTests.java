@@ -81,7 +81,7 @@ class SeleniumJSExecuteTests {
 
     @Test
     @DisplayName("Check screenshot attachment")
-    void infiniteScrollTestWithAttach() throws InterruptedException, IOException {
+    void infiniteScrollTestWithAttach() throws InterruptedException {
         driver.get("https://bonigarcia.dev/selenium-webdriver-java/infinite-scroll.html");
         JavascriptExecutor js = (JavascriptExecutor) driver;
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));

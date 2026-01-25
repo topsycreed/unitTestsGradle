@@ -326,7 +326,7 @@ class SeleniumActionTests {
     }
 
     @Test
-    void selectTest() throws InterruptedException {
+    void selectTest() {
         driver.get("https://bonigarcia.dev/selenium-webdriver-java/web-form.html");
         var selectElement = driver.findElement(By.name("my-select"));
         Select select = new Select(selectElement);
@@ -377,6 +377,6 @@ class SeleniumActionTests {
         assertThat(Boolean.parseBoolean(readonly.getAttribute("readonly")))
                 .as("Should be %s", isReadOnly)
                 .isFalse();
-        Assertions.assertEquals(readonly.getAttribute("readonly"), "true");
+        Assertions.assertEquals("true", readonly.getAttribute("readonly"));
     }
 }

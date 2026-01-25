@@ -19,8 +19,6 @@ import pages.playwright.HomePage;
 import pages.playwright.WebFormPage;
 import steps.AllureSteps;
 
-import java.io.IOException;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -96,7 +94,7 @@ class PlaywrightTests {
 
     @Test
     @DisplayName("Check screenshot attachment")
-    void infiniteScrollTestWithAttach() throws InterruptedException, IOException {
+    void infiniteScrollTestWithAttach() throws InterruptedException {
         page.navigate("https://bonigarcia.dev/selenium-webdriver-java/infinite-scroll.html");
 
         page.waitForSelector("xpath=//p");
