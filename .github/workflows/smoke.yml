@@ -1,0 +1,48 @@
+name: Run smoke tests
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
+
+    - name: Build with Gradle Wrapper
+      run: ./gradlew clean smokeTest
+
+    - name: Copy History
+      uses: actions/checkout@v2
+      if: always()
+      with:
+        ref: gh-pages
+        path: gh-pages
+        
+    - name: Build Report
+      uses: simple-elf/allure-report-action@v1.10
+      if: always()
+      with:
+        allure_results: build/allure-results
+        allure_history: allure-history
+        keep_reports: 20
+        
+    - name: Publish Report
+      if: always()
+      uses: peaceiris/actions-gh-pages@v2
+      env:
+        PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        PUBLISH_BRANCH: gh-pages
+        PUBLISH_DIR: allure-history
