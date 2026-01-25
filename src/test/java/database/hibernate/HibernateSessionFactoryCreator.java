@@ -1,9 +1,6 @@
 package database.hibernate;
 
-import database.hibernate.models.Animal;
-import database.hibernate.models.Places;
-import database.hibernate.models.Workman;
-import database.hibernate.models.Zoo;
+import database.hibernate.models.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -24,6 +21,10 @@ public class HibernateSessionFactoryCreator {
         configuration.addAnnotatedClass(Places.class);
         configuration.addAnnotatedClass(Workman.class);
         configuration.addAnnotatedClass(Zoo.class);
+        configuration.addAnnotatedClass(Sex.class);
+        configuration.addAnnotatedClass(AnimalType.class);
+        configuration.addAnnotatedClass(Position.class);
+        configuration.addAnnotatedClass(ZooAnimal.class);
         StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
         sessionFactory = configuration.buildSessionFactory(builder.build());
         return sessionFactory;

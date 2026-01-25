@@ -1,19 +1,21 @@
-package database.hibernate.models;
+package database.jdbc.models;
 
-import jakarta.persistence.*;
-
-@Entity
-@Table(name = "workman")
 public class Workman {
-    @Id
-    int id;
-    @Column(name = "`name`", nullable = false)
-    String name;
-    @Column(name = "age")
-    int age;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "`position`", referencedColumnName = "id")
-    Position position;
+    private int id;
+    private String name;
+    private int age;
+    private int position;
+
+    public Workman(int id, String name, int age, int position) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.position = position;
+    }
+
+    public Workman() {
+
+    }
 
     public int getId() {
         return id;
@@ -39,11 +41,11 @@ public class Workman {
         this.age = age;
     }
 
-    public Position getPosition() {
+    public int getPosition() {
         return position;
     }
 
-    public void setPosition(Position position) {
+    public void setPosition(int position) {
         this.position = position;
     }
 

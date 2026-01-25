@@ -1,12 +1,6 @@
 package database.hibernate.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "animal")
@@ -15,16 +9,19 @@ public class Animal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-    @Column(name = "name")
+    @Column(name = "`name`")
     private String name;
     @Column(name = "age")
     private int age;
-    @Column(name = "type")
-    private int type;
-    @Column(name = "sex")
-    private int sex;
-    @Column(name = "place")
-    private int place;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "`type`", referencedColumnName = "id")
+    private AnimalType type;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sex", referencedColumnName = "id")
+    private Sex sex;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "place", referencedColumnName = "id")
+    private Places place;
 
     public Animal() {
     }
@@ -53,27 +50,27 @@ public class Animal {
         this.age = age;
     }
 
-    public int getType() {
+    public AnimalType getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(AnimalType type) {
         this.type = type;
     }
 
-    public int getSex() {
+    public Sex getSex() {
         return sex;
     }
 
-    public void setSex(int sex) {
+    public void setSex(Sex sex) {
         this.sex = sex;
     }
 
-    public int getPlace() {
+    public Places getPlace() {
         return place;
     }
 
-    public void setPlace(int place) {
+    public void setPlace(Places place) {
         this.place = place;
     }
 

@@ -6,9 +6,21 @@
     <session-factory>
         <property name="hibernate.dialect">org.hibernate.dialect.H2Dialect</property>
         <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
+        <property name="hibernate.hbm2ddl.auto">create-drop</property>
+
         <property name="hibernate.connection.driver_class">org.h2.Driver</property>
         <property name="hibernate.connection.username">sa</property>
         <property name="hibernate.connection.password">sa</property>
         <property name="hibernate.connection.url">jdbc:h2:mem:myDb;DB_CLOSE_DELAY=-1</property>
+
+        <mapping class="database.hibernate.models.Animal"/>
+        <mapping class="database.hibernate.models.Workman"/>
+        <mapping class="database.hibernate.models.Places"/>
+        <mapping class="database.hibernate.models.Zoo"/>
+        <mapping class="database.hibernate.models.Sex"/>
+        <mapping class="database.hibernate.models.AnimalType"/>
+        <mapping class="database.hibernate.models.Position"/>
+        <mapping class="database.hibernate.models.ZooAnimal"/>
     </session-factory>
 </hibernate-configuration>
